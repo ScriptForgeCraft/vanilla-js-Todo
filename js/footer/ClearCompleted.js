@@ -1,12 +1,14 @@
-export default function ClearCompleted() {
-  const container = document.createElement("div");
-  const state = "";
-  const input = document.createElement("input");
-  const span = document.createElement("span");
-  span.textContent = "0/?";
+import createElement from "../createElement.js";
 
-  input.value = "Clear Completed";
-  input.type = "submit";
-  container.append(span, input);
-  return { container, state };
+export default function ClearCompleted(initialState, ClearCompleted) {
+  const completedLength = initialState.filter((value) => value.isCompleted).length;
+  const [container, button, span] = createElement(["div", "button", "span"]);
+  span.textContent = ` ${completedLength}/${initialState.length}  `;
+  button.textContent = "Clear Completed";
+  button.addEventListener("click", () => {
+    ClearCompleted();
+  });
+
+  container.append(span, button);
+  return { container };
 }

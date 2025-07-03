@@ -1,4 +1,4 @@
-import createElement from "./createElement.js";
+import createElement from "../createElement.js";
 
 export default function TodoList(initialState) {
   const [container, ul] = createElement(["div", "ul"]);
