@@ -7,7 +7,6 @@ export default function TodoInput(Add) {
     "input",
     "input",
   ]);
-  const state = "";
   subbmit.type = "submit";
   subbmit.value = "Add";
   form.addEventListener("submit", (evt) => {
@@ -19,5 +18,5 @@ export default function TodoInput(Add) {
   });
   form.append(input, subbmit);
   container.appendChild(form);
-  return { container, state };
+  return { container };
 }

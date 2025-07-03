@@ -1,6 +1,6 @@
 import createElement from "../createElement.js";
 
-export default function TodoList(initialState) {
+export default function TodoList(initialState, deleteTask) {
   const [container, ul] = createElement(["div", "ul"]);
 
   initialState.forEach((item) => {
@@ -12,6 +12,10 @@ export default function TodoList(initialState) {
     </label>
       <button>X</button>
     `;
+    const button = li.querySelector("button");
+    button.addEventListener("click", () => {
+      deleteTask(item.id);
+    });
     ul.appendChild(li);
   });
 

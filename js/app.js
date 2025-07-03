@@ -28,7 +28,10 @@ function createApp() {
     ];
     render();
   });
-  const { container: listContainer } = TodoList(initialState);
+  const { container: listContainer } = TodoList(initialState, (id) => {
+    initialState = initialState.filter((item) => item.id !== id);
+    render();
+  });
   const { container: clearContainer } = ClearCompleted(initialState);
   const mainContainer = createElement("div");
   mainContainer.append(inputContainer, listContainer, clearContainer);
@@ -36,7 +39,8 @@ function createApp() {
 }
 
 function render() {
-  const appContainer = createApp();
+  root.innerHTML = '';
+  let appContainer = createApp();
   rootElement.appendChild(appContainer);
 }
 render();
