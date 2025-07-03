@@ -28,10 +28,26 @@ function createApp() {
     ];
     render();
   });
-  const { container: listContainer } = TodoList(initialState, (id) => {
-    initialState = initialState.filter((item) => item.id !== id);
-    render();
-  });
+  const { container: listContainer } = TodoList(
+    initialState,
+    (id) => {
+      initialState = initialState.filter((item) => item.id !== id);
+      render();
+    },
+    (id) => {
+      initialState = initialState.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            isCompleted: !item.isCompleted,  
+          };
+        }
+        return item;
+      });
+
+      render();
+    }
+  );
   const { container: clearContainer } = ClearCompleted(initialState);
   const mainContainer = createElement("div");
   mainContainer.append(inputContainer, listContainer, clearContainer);
@@ -39,7 +55,7 @@ function createApp() {
 }
 
 function render() {
-  root.innerHTML = '';
+  root.innerHTML = "";
   let appContainer = createApp();
   rootElement.appendChild(appContainer);
 }
