@@ -48,7 +48,10 @@ function createApp() {
       render();
     }
   );
-  const { container: clearContainer } = ClearCompleted(initialState);
+  const { container: clearContainer } = ClearCompleted(initialState,()=>{
+    initialState = initialState.filter(item=> !item.isCompleted)
+    render()
+  });
   const mainContainer = createElement("div");
   mainContainer.append(inputContainer, listContainer, clearContainer);
   return mainContainer;
